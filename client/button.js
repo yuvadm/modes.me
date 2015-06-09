@@ -1,13 +1,20 @@
-Session.setDefault('counter', 0);
+Template.layout.events({
+  'click .logout': function (event) {
+    Meteor.logout();
+    Router.go('login');
+  }
+})
 
-Template.hello.helpers({
-  counter: function () {
-    return Session.get('counter');
+Template.login.events({
+  'click .login-instagram': function (event) {
+    Meteor.loginWithInstagram({}, function (err) {
+      if (err)
+        Session.set('errorMessage', err.reason || 'Unknown error');
+    });
+    return false;
   }
 });
 
-Template.hello.events({
-  'click button': function () {
-    Session.set('counter', Session.get('counter') + 1);
-  }
+Accounts.onLogin(function() {
+  Router.go('one');
 });
