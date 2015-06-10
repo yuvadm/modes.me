@@ -2,8 +2,10 @@
   {{#each photos}}
     {{> photo}}
   {{/each}}
+  <button class="pixelate btn btn-default">Pixelate</button>
 </template>
 
 <template name="photo">
-  <img src="{{images.thumbnail.url}}">
+  <img id="img-{{id}}" src="{{images.thumbnail.url}}" crossOrigin="Anonymous">
+  <canvas id="canvas-{{id}}" resize="true" style="width: 180px; height: 230px;"></canvas>
 </template>
