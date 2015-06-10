@@ -1,27 +1,42 @@
 <template name="dates">
-  <form class="dates">
-    <div class="form-group">
-      {{#each months}}
-        {{> month}}
-      {{/each}}
+  <div class="dates-wrapper">
+    <div class="dates">
+      <h2>Choose your month</h2>
+      <form class="dates">
+        <div class="form-group">
+          {{#each months}}
+            {{> row}}
+          {{/each}}
+        </div>
+        <div class="form-group">
+          <div class="years">
+            {{#each years}}
+              {{> year}}
+            {{/each}}
+          </div>
+        </div>
+        <button type="submit" class="dates btn btn-default">Start</button>
+      </form>
     </div>
-    <div class="form-group">
-      {{#each years}}
-        {{> year}}
-      {{/each}}
-    </div>
-    <button type="submit" class="dates btn btn-default">Start</button>
-  </form>
+  </div>
+</template>
+
+<template name="row">
+  <div class="row month-row">
+  {{#each this}}
+    {{> month}}
+  {{/each}}
+  </div>
 </template>
 
 <template name="month">
-  <label class="radio-inline">
-    <input type="radio" name="monthOptions" id="monthRadio{{this}}" value="{{this}}"> {{this}}
-  </label>
+  <div class="col-xs-4">
+    <input type="radio" name="monthOptions" id="monthRadio{{val}}" value="{{val}}">
+    <label class="radio-inline" for="monthRadio{{val}}">{{name}}</label>
+  </div>
 </template>
 
 <template name="year">
-  <label class="radio-inline">
-    <input type="radio" name="yearOptions" id="yearRadio{{this}}" value="{{this}}"> {{this}}
-  </label>
+  <input type="radio" name="yearOptions" id="yearRadio{{this}}" value="{{this}}">
+  <label class="radio-inline" for="yearRadio{{this}}">{{this}}</label>
 </template>
