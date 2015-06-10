@@ -6,7 +6,7 @@ Template.layout.events({
 })
 
 Template.login.events({
-  'click .login-instagram': function (event) {
+  'click button.login': function (event) {
     Meteor.loginWithInstagram({}, function (err) {
       if (err)
         Session.set('errorMessage', err.reason || 'Unknown error');
