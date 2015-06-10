@@ -15,6 +15,16 @@ Template.login.events({
   }
 });
 
+Template.one.helpers({
+  photos: function () {
+    return Session.get('photos');
+  }
+})
+
 Accounts.onLogin(function() {
+  Meteor.call('getInstagramMedia', function(error, results) {
+    console.log('Instagram response', results.data)
+    Session.set('photos', results.data.data);
+  });
   Router.go('one');
 });

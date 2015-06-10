@@ -1,3 +1,10 @@
 <template name="one">
   <h1>one</h1>
+  {{#each photos}}
+    {{> photo}}
+  {{/each}}
+</template>
+
+<template name="photo">
+  <li>{{id}}</li>
 </template>
