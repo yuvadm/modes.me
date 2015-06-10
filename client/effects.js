@@ -25,9 +25,10 @@ Effects = (function() {
           strokeColor: color,
           fillColor: color
         });
-        paper.view.draw();
       }
     }
+
+    paper.view.draw();
 
     var quant = MMCQ.quantize(colors, 2);
     var palette = quant.palette();
