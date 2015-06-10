@@ -1,3 +1,27 @@
 <template name="dates">
-  <h2>select</h2>
+  <form class="dates">
+    <div class="form-group">
+      {{#each months}}
+        {{> month}}
+      {{/each}}
+    </div>
+    <div class="form-group">
+      {{#each years}}
+        {{> year}}
+      {{/each}}
+    </div>
+    <button type="submit" class="dates btn btn-default">Start</button>
+  </form>
+</template>
+
+<template name="month">
+  <label class="radio-inline">
+    <input type="radio" name="monthOptions" id="monthRadio{{this}}" value="{{this}}"> {{this}}
+  </label>
+</template>
+
+<template name="year">
+  <label class="radio-inline">
+    <input type="radio" name="yearOptions" id="yearRadio{{this}}" value="{{this}}"> {{this}}
+  </label>
 </template>
