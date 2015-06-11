@@ -10,7 +10,7 @@ body {
         text-align: center;
         flex: 0 0 auto;
         h1 {
-          color: #67C288;
+          color: #2636F9;
           font-size: 3.5em;
           font-weight: bold;
         }
@@ -18,16 +18,18 @@ body {
           margin: 30px 10px 0px 10px;
           font-size: 2em;
           font-weight: bold;
+          color: #333;
         }
         button.login {
           margin-top: 30px;
-          color: #fff;
+          color: #2636F9;
           font-size: 1.3em;
-          background-color: #67C288;
+          background-color: white;
           padding: 7px 35px;
           border: 0px;
           &:hover, &:active {
-            background-color: #5DA577;
+            color: white;
+            background-color: #2636F9;
           }
         }
       }
@@ -35,45 +37,50 @@ body {
     div.dates-wrapper {
       div.dates {
         h2 {
-          color: #4589F7;
+          color: #2636F9;
           font-size: 3.3em;
           font-weight: bold;
           text-align: center;
         }
         form {
           div.month-row {
-            padding: 40px;
-            label.radio-inline {
-              width: 90%;
-              text-align: center;
-              color: #333;
-              border: 1px solid #333;
-              padding: 9px;
-              font-size: 2.2em;
-            }
-            input[type="radio"] {
-              display: none;
-              &:checked + label.radio-inline {
-                color: #fff;
-                background-color: #4589F7;
-                border: 0px;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: center;
+            justify-content: center;
+            div.month-button {
+              -webkit-flex-grow: 1;
+              flex-grow: 1;
+              label.radio-inline {
+                text-align: center;
+                color: #333;
+                padding: 10px;
+                font-size: 1.2em;
+                width: 100%;
+              }
+              input[type="radio"] {
+                display: none;
+                &:checked + label.radio-inline {
+                  color: #fff;
+                  background-color: #4589F7;
+                  border: 0px;
+                }
               }
             }
           }
           div.years {
-            margin-top: 40px;
+            margin-top: 20px;
             text-align: center;
             label.radio-inline {
               color: #333;
               padding: 9px;
-              font-size: 2.2em;
+              font-size: 1.6em;
             }
             input[type="radio"] {
               display: none;
               &:checked + label.radio-inline {
                 color: #4589F7;
                 font-weight: bold;
-                border: 0px;
               }
             }
           }

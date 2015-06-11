@@ -22,7 +22,7 @@
 </template>
 
 <template name="row">
-  <div class="row month-row">
+  <div class="month-row">
   {{#each this}}
     {{> month}}
   {{/each}}
@@ -30,7 +30,7 @@
 </template>
 
 <template name="month">
-  <div class="col-xs-4">
+  <div class="month-button">
     <input type="radio" name="monthOptions" id="monthRadio{{val}}" value="{{val}}">
     <label class="radio-inline" for="monthRadio{{val}}">{{name}}</label>
   </div>

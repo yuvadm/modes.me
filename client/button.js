@@ -33,7 +33,7 @@ Template.dates.events({
 Template.dates.helpers({
   months: [
     [{val: 1, name: 'Jan.'}, {val: 2, name: 'Feb.'}, {val: 3, name: 'March'}],
-    [{val: 4, name: 'Apr.'}, {val: 5, name: 'May'}, {val: 6, name: 'June'}],
+    [{val: 4, name: 'April'}, {val: 5, name: 'May'}, {val: 6, name: 'June'}],
     [{val: 7, name: 'July'}, {val: 8, name: 'Aug.'}, {val: 9, name: 'Sept.'}],
     [{val: 10, name: 'Oct.'}, {val: 11, name: 'Nov.'}, {val: 12, name: 'Dec.'}],
   ],
