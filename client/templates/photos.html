@@ -1,11 +1,28 @@
 <template name="photos">
-  {{#each photos}}
-    {{> photo}}
-  {{/each}}
-  <button class="pixelate btn btn-default">Pixelate</button>
+  <div class="photos-wrapper">
+    <h4>(Step 1)</h4>
+    <h2>Processing...</h2>
+    <div class="photos">
+      {{#each photos}}
+        {{> photo}}
+        {{> photo}}
+        {{> photo}}
+        {{> photo}}
+        {{> photo}}
+        {{> photo}}
+        {{> photo}}
+        {{> photo}}
+        {{> photo}}
+      {{/each}}
+    </div>
+  </div>
+  <!-- <button class="pixelate btn btn-default">Pixelate</button> -->
 </template>
 
 <template name="photo">
-  <img id="img-{{id}}" src="{{images.thumbnail.url}}" crossorigin="anonymous">
-  <canvas id="canvas-{{id}}" resize="true" style="width: 180px; height: 230px;"></canvas>
+  <div class="photo">
+    <div class="title">{{date}}</div>
+    <img id="img-{{id}}" src="{{images.thumbnail.url}}" crossorigin="anonymous">
+    <!-- <canvas id="canvas-{{id}}" resize="true" style="width: 180px; height: 230px;"></canvas> -->
+  </div>
 </template>
