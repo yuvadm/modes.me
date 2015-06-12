@@ -14,7 +14,7 @@
 <template name="photo">
   <div class="photo">
     <div class="title">{{date}}</div>
-    <img id="img-{{id}}" src="{{images.thumbnail.url}}" crossorigin="anonymous">
+    <img id="img-{{id}}" src="{{proxy images.thumbnail.url}}" crossorigin="anonymous">
     <canvas id="canvas-{{id}}" style="display: none;"></canvas>
   </div>
 </template>
