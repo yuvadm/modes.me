@@ -5,7 +5,7 @@ Effects = (function() {
 
     var raster = new paper.Raster('img-' + id);
     raster.visible = false;
-    var gridSize = 20;
+    var gridSize = 6;
     var gridDim = 9;
     var colors = [];
 
@@ -29,6 +29,7 @@ Effects = (function() {
     }
 
     paper.view.draw();
+    return;
 
     var quant = MMCQ.quantize(colors, 2);
     var palette = quant.palette();

@@ -43,7 +43,9 @@ Template.dates.helpers({
 Template.photos.events({
   'click button.pixelate': function (event) {
     _.each(Session.get('photos'), function(x) {
+      $('#img-'+x.id).hide()
       Effects.pixelate(x.id);
+      $('#canvas-'+x.id).show()
     })
   }
 })

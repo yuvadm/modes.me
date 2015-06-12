@@ -15,14 +15,14 @@
         {{> photo}}
       {{/each}}
     </div>
+    <button class="pixelate btn btn-default">Pixelate</button>
   </div>
-  <!-- <button class="pixelate btn btn-default">Pixelate</button> -->
 </template>
 
 <template name="photo">
   <div class="photo">
     <div class="title">{{date}}</div>
     <img id="img-{{id}}" src="{{images.thumbnail.url}}" crossorigin="anonymous">
-    <!-- <canvas id="canvas-{{id}}" resize="true" style="width: 180px; height: 230px;"></canvas> -->
+    <canvas id="canvas-{{id}}" style="display: none;"></canvas>
   </div>
 </template>
