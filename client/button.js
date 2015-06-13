@@ -47,6 +47,13 @@ Template.photos.events({
       Effects.pixelate(x.id);
       $('#canvas-'+x.id).show()
     })
+  },
+  'click button.color': function (event) {
+    _.each(Session.get('photos'), function(x) {
+      $('#img-'+x.id).hide()
+      Effects.colorize(x.id);
+      $('#canvas-'+x.id).show()
+    })
   }
 })
 
