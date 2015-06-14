@@ -66,7 +66,7 @@ Template.photos.helpers({
 Template.photo.helpers({
   date: function () {
     var d = new Date(parseInt(this.created_time) * 1000);
-    return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+    return d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
   },
   proxy: function (url) {
     return url.replace('https://scontent.cdninstagram.com', '/imgproxy?url=')
