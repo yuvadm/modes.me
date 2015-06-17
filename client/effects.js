@@ -36,7 +36,7 @@ Effects = (function() {
           var rec = new paper.Path.Rectangle({
             point: [x * gridSize, y * gridSize],
             size: [gridSize, gridSize],
-            strokeColor: color,
+            strokeWidth: 0,
             fillColor: color
           });
         }
@@ -96,7 +96,7 @@ Effects = (function() {
         var rec = new paper.Path.Rectangle({
           point: [x * gridSize, y * gridSize],
           size: [gridSize, gridSize],
-          strokeColor: nc,
+          strokeWidth: 0,
           fillColor: nc
         });
       }
@@ -171,6 +171,8 @@ Effects = (function() {
       flipped = true;
     }
 
+    var finalcols = [];
+
     for (var y = 0; y < gridDim; y++) {
       for(var x = 0; x < gridDim; x++) {
         var c = cols[(y * gridDim) + x];
@@ -182,23 +184,61 @@ Effects = (function() {
           nc = flipped ? g_p1 : g_p2;
         }
 
+        finalcols.push(nc);
+
         var rec = new paper.Path.Rectangle({
           point: [x * gridSize, y * gridSize],
           size: [gridSize, gridSize],
-          strokeColor: nc,
+          strokeWidth: 0,
           fillColor: nc
         });
       }
     }
 
     p.view.draw();
+
+    Session.set(id + ':finalcols', finalcols);
+  }
+
+  function drawFinal() {
+    var canvas = document.getElementById('canvas-final');
+    var p = new paper.PaperScope();
+    p.setup(canvas);
+
+    var gridSize = 35;
+    var gridDim = 9;
+
+    _.each(Session.get('photos'), function (x) {
+      var id = x.id;
+      _.delay(function () {
+        var cols = Session.get(id + ':finalcols');
+        for (var y = 0; y < gridDim; y++) {
+          for(var x = 0; x < gridDim; x++) {
+            var c = cols[(y * gridDim) + x];
+
+            var nc = new paper.Color(c[0], c[1], c[2], 0.5);
+
+            console.log(x, y, nc);
+
+            var rec = new paper.Path.Rectangle({
+              point: [x * gridSize, y * gridSize],
+              size: [gridSize, gridSize],
+              strokeWidth: 0,
+              fillColor: nc
+            });
+          }
+        }
+        p.view.draw();
+      }, 1000)
+    })
   }
 
   return {
     pixelate: pixelate,
     colorize: colorize,
     average: average,
-    averageColor: averageColor
+    averageColor: averageColor,
+    drawFinal: drawFinal
   }
 
 })();

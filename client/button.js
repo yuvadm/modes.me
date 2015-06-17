@@ -77,6 +77,16 @@ function animate() {
     });
   }, delay + 2000);
 
+  delay += 400 * photos.length;
+  delay += 2000;
+
+  _.delay(function() {
+    $('h4.step').text('(Step 5)');
+    $('div.photos').hide();
+    $('div.final').show()
+
+    Effects.drawFinal();
+  }, delay + 2000);
 }
 
 Template.layout.events({
