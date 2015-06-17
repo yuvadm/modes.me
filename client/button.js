@@ -43,10 +43,33 @@ function animate() {
   delay += 2000;
 
   _.delay(function() {
-    Effects.average();
-  }, delay);
+    $('h4.step').text('(Step 4)');
+    $('div.photos').hide();
+
+    var palette = Effects.average();
+
+    $('div#dominant1').css('background', 'rgba(' + palette[0][0] + ',' + palette[0][1] + ',' + palette[0][2] + ',1)');
+    $('div#dominant2').css('background', 'rgba(' + palette[1][0] + ',' + palette[1][1] + ',' + palette[1][2] + ',1)');
+
+    $('div#dominant1').siblings('h5').text('#'
+      + palette[0][0].toString(16).toUpperCase()
+      + palette[0][1].toString(16).toUpperCase()
+      + palette[0][2].toString(16).toUpperCase()
+    )
+    $('div#dominant2').siblings('h5').text('#'
+      + palette[1][0].toString(16).toUpperCase()
+      + palette[1][1].toString(16).toUpperCase()
+      + palette[1][2].toString(16).toUpperCase()
+    )
+
+    $('div.dominants').show();
+  }, delay + 2000);
+
+  delay += 2000;
 
   _.delay(function() {
+    $('div.dominants').hide();
+    $('div.photos').show();
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function () {
         Effects.averageColor(x.id);

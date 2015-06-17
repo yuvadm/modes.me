@@ -134,6 +134,8 @@ Effects = (function() {
 
     Session.set('g_p1', g_p1);
     Session.set('g_p2', g_p2);
+
+    return g_palette;
   }
 
   function averageColor(id) {
