@@ -14,6 +14,7 @@ function animate() {
 
   // pixelate
   _.delay(function () {
+    $('h4.step').text('(Step 2)');
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function() {
         $('#img-'+x.id).hide()
@@ -28,6 +29,7 @@ function animate() {
 
   // colorize
   _.delay(function() {
+    $('h4.step').text('(Step 3)');
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function () {
         $('#img-'+x.id).hide()

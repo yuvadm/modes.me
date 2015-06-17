@@ -140,8 +140,8 @@ Effects = (function() {
     var cols = Session.get(id + ':newcolors');
     var palette = Session.get(id + ':palette');
 
-    var g_p1 = Session.get('g_p1');
-    var g_p2 = Session.get('g_p2');
+    var g_p1 = new paper.Color(Session.get('g_p1'));
+    var g_p2 = new paper.Color(Session.get('g_p2'));
 
     var canvas = document.getElementById('canvas-' + id);
     var p = new paper.PaperScope();
