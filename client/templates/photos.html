@@ -4,18 +4,20 @@
     <h2>Processing...</h2>
     <button class="pixelate btn btn-default">Pixelate</button>
     <button class="color btn btn-default">Color</button>
+    <button class="average btn btn-default">Average</button>
     <div class="photos">
       {{#each photos}}
         {{> photo}}
       {{/each}}
     </div>
+    <canvas id="canvas-all" style="height: 150px; width: 150px;"></canvas>
   </div>
 </template>
 
 <template name="photo">
   <div class="photo">
     <div class="title">{{date}}</div>
-    <img id="img-{{id}}" src="{{proxy images.thumbnail.url}}" crossorigin="anonymous">
+    <img id="img-{{id}}" class="instagram-photo" src="{{proxy images.thumbnail.url}}" crossorigin="anonymous">
     <canvas id="canvas-{{id}}" style="height: 150px; width: 150px;"></canvas>
   </div>
 </template>

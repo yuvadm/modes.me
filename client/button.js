@@ -54,6 +54,9 @@ Template.photos.events({
       Effects.colorize(x.id);
       $('#canvas-'+x.id).show()
     })
+  },
+  'click button.average': function (event) {
+    Effects.average();
   }
 })
 

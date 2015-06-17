@@ -54,6 +54,11 @@ Effects = (function() {
       var palette = quant.palette(true);
       var newcolors = quant.reduce(cols);
 
+      // if (window.gb === undefined)
+      //   window.gb = [];
+      // window.gb.push(palette[0][0], palette[0][1], palette[0][2], 0.16);
+      // window.gb.push(palette[1][0], palette[1][1], palette[1][2], 0.16);
+
       var newcolors2 = [];
       for (var x=0; x < gridDim * gridDim; x++) {
         newcolors2.push([newcolors[(x*4)], newcolors[(x*4)+1], newcolors[(x*4)+2]]);
@@ -99,9 +104,38 @@ Effects = (function() {
     p.view.draw();
   }
 
+  function average() {
+    var canvas = document.getElementById('canvas-all');
+    var p = new paper.PaperScope();
+    p.setup(canvas);
+
+    var i = 0;
+    var photos = $('.instagram-photo');
+    canvas.width = 150;
+    canvas.style.width = 150;
+
+    _.each(photos, function(x) {
+      var raster = new paper.Raster(x);
+      raster.position = new paper.Size(75, 75);
+      raster.opacity = 1 / photos.length;
+    })
+
+    p.view.draw();
+
+    var quant = new RgbQuant({
+      colors: 2,
+      minHueCols: 16
+    });
+    quant.sample(canvas);
+    var palette = quant.palette(true);
+
+    console.log(palette);
+  }
+
   return {
     pixelate: pixelate,
-    colorize: colorize
+    colorize: colorize,
+    average: average
   }
 
 })();
