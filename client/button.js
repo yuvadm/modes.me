@@ -1,3 +1,51 @@
+function animate() {
+  var delay = 0;
+
+  // load
+  var photos = $('div.photo');
+  photos.each(function(i) {
+    var self = this;
+    _.delay(function () {
+      $(self).show();
+    }, 400 * i);
+  });
+
+  delay += 400 * photos.length;
+
+  // pixelate
+  _.delay(function () {
+    _.each(Session.get('photos'), function(x, i) {
+      _.delay(function() {
+        $('#img-'+x.id).hide()
+        Effects.pixelate(x.id);
+        $('#canvas-'+x.id).show()
+      }, 400 * i);
+    });
+  }, delay + 2000);
+
+  delay += 400 * photos.length;
+  delay += 2000;
+
+  // colorize
+  _.delay(function() {
+    _.each(Session.get('photos'), function(x, i) {
+      _.delay(function () {
+        $('#img-'+x.id).hide()
+        Effects.colorize(x.id);
+        $('#canvas-'+x.id).show()
+      }, 400 * i);
+    });
+  }, delay + 2000);
+
+  delay += 400 * photos.length;
+  delay += 2000;
+
+  _.delay(function() {
+    Effects.average();
+  }, delay + 2000);
+
+}
+
 Template.layout.events({
   'click .logout': function (event) {
     Meteor.logout();
@@ -25,6 +73,7 @@ Template.dates.events({
         Session.set('photos', results.data.data);
       });
       Router.go('photos');
+      _.delay(animate, 2000);
     }
     return false;
   }

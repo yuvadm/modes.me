@@ -1,10 +1,10 @@
 <template name="photos">
   <div class="photos-wrapper">
-    <h4>(Step 1)</h4>
-    <h2>Processing...</h2>
-    <button class="pixelate btn btn-default">Pixelate</button>
+    <h4 class="step">(Step 1)</h4>
+    <h2 class="title">Processing...</h2>
+    <!-- <button class="pixelate btn btn-default">Pixelate</button>
     <button class="color btn btn-default">Color</button>
-    <button class="average btn btn-default">Average</button>
+    <button class="average btn btn-default">Average</button> -->
     <div class="photos">
       {{#each photos}}
         {{> photo}}
@@ -15,7 +15,7 @@
 </template>
 
 <template name="photo">
-  <div class="photo">
+  <div class="photo" style="display: none;">
     <div class="title">{{date}}</div>
     <img id="img-{{id}}" class="instagram-photo" src="{{proxy images.thumbnail.url}}" crossorigin="anonymous">
     <canvas id="canvas-{{id}}" style="height: 150px; width: 150px;"></canvas>
