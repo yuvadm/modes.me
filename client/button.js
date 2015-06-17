@@ -42,6 +42,14 @@ function animate() {
 
   _.delay(function() {
     Effects.average();
+  }, delay);
+
+  _.delay(function() {
+    _.each(Session.get('photos'), function(x, i) {
+      _.delay(function () {
+        Effects.averageColor(x.id);
+      }, 400 * i);
+    });
   }, delay + 2000);
 
 }

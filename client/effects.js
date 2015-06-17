@@ -132,69 +132,71 @@ Effects = (function() {
     var g_p1 = new paper.Color(g_palette[0][0] / 256, g_palette[0][1] / 256, g_palette[0][2] / 256);
     var g_p2 = new paper.Color(g_palette[1][0] / 256, g_palette[1][1] / 256, g_palette[1][2] / 256);
 
-    console.log(g_palette);
+    Session.set('g_p1', g_p1);
+    Session.set('g_p2', g_p2);
+  }
 
-    _.each(photos, function(x) {
-      var id = x.id.split('-')[1];
-      var cols = Session.get(id + ':newcolors');
-      var palette = Session.get(id + ':palette');
+  function averageColor(id) {
+    var cols = Session.get(id + ':newcolors');
+    var palette = Session.get(id + ':palette');
 
-      var canvas = document.getElementById('canvas-' + id);
-      var p = new paper.PaperScope();
-      p.setup(canvas);
+    var g_p1 = Session.get('g_p1');
+    var g_p2 = Session.get('g_p2');
 
-      // params
-      var gridSize = 6;
-      var gridDim = 9;
+    var canvas = document.getElementById('canvas-' + id);
+    var p = new paper.PaperScope();
+    p.setup(canvas);
 
-      var p1 = new paper.Color(palette[0][0] / 256, palette[0][1] / 256, palette[0][2] / 256);
-      var p2 = new paper.Color(palette[1][0] / 256, palette[1][1] / 256, palette[1][2] / 256);
+    // params
+    var gridSize = 6;
+    var gridDim = 9;
 
-      var d1 = Math.abs(p1.red - g_p1.red) + Math.abs(p1.green - g_p1.green) + Math.abs(p1.blue - g_p1.blue);
-      var d2 = Math.abs(p2.red - g_p1.red) + Math.abs(p2.green - g_p1.green) + Math.abs(p2.blue - g_p1.blue);
-      var d3 = Math.abs(p1.red - g_p2.red) + Math.abs(p1.green - g_p2.green) + Math.abs(p1.blue - g_p2.blue);
-      var d4 = Math.abs(p2.red - g_p2.red) + Math.abs(p2.green - g_p2.green) + Math.abs(p2.blue - g_p2.blue);
+    var p1 = new paper.Color(palette[0][0] / 256, palette[0][1] / 256, palette[0][2] / 256);
+    var p2 = new paper.Color(palette[1][0] / 256, palette[1][1] / 256, palette[1][2] / 256);
+
+    var d1 = Math.abs(p1.red - g_p1.red) + Math.abs(p1.green - g_p1.green) + Math.abs(p1.blue - g_p1.blue);
+    var d2 = Math.abs(p2.red - g_p1.red) + Math.abs(p2.green - g_p1.green) + Math.abs(p2.blue - g_p1.blue);
+    var d3 = Math.abs(p1.red - g_p2.red) + Math.abs(p1.green - g_p2.green) + Math.abs(p1.blue - g_p2.blue);
+    var d4 = Math.abs(p2.red - g_p2.red) + Math.abs(p2.green - g_p2.green) + Math.abs(p2.blue - g_p2.blue);
 
 
-      var flipped = false;
+    var flipped = false;
 
-      if (d1+d4 > d2+d3) {
-        var t = p2;
-        p2 = p1;
-        p1 = t;
-        flipped = true;
-      }
+    if (d1+d4 > d2+d3) {
+      var t = p2;
+      p2 = p1;
+      p1 = t;
+      flipped = true;
+    }
 
-      for (var y = 0; y < gridDim; y++) {
-        for(var x = 0; x < gridDim; x++) {
-          var c = cols[(y * gridDim) + x];
+    for (var y = 0; y < gridDim; y++) {
+      for(var x = 0; x < gridDim; x++) {
+        var c = cols[(y * gridDim) + x];
 
-          var nc;
-          if (c[0] == palette[0][0] && c[1] == palette[0][1] && palette[0][2]) {
-            nc = flipped ? g_p2 : g_p1;
-          } else {
-            nc = flipped ? g_p1 : g_p2;
-          }
-
-          var rec = new paper.Path.Rectangle({
-            point: [x * gridSize, y * gridSize],
-            size: [gridSize, gridSize],
-            strokeColor: nc,
-            fillColor: nc
-          });
+        var nc;
+        if (c[0] == palette[0][0] && c[1] == palette[0][1] && palette[0][2]) {
+          nc = flipped ? g_p2 : g_p1;
+        } else {
+          nc = flipped ? g_p1 : g_p2;
         }
+
+        var rec = new paper.Path.Rectangle({
+          point: [x * gridSize, y * gridSize],
+          size: [gridSize, gridSize],
+          strokeColor: nc,
+          fillColor: nc
+        });
       }
+    }
 
-      p.view.draw();
-
-    });
-
+    p.view.draw();
   }
 
   return {
     pixelate: pixelate,
     colorize: colorize,
-    average: average
+    average: average,
+    averageColor: averageColor
   }
 
 })();
