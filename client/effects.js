@@ -208,7 +208,7 @@ Effects = (function() {
     var gridSize = 35;
     var gridDim = 9;
 
-    _.each(Session.get('photos'), function (x) {
+    _.each(Session.get('photos'), function (x, i) {
       var id = x.id;
       _.delay(function () {
         var cols = Session.get(id + ':finalcols');
@@ -229,7 +229,7 @@ Effects = (function() {
           }
         }
         p.view.draw();
-      }, 1000)
+      }, i * 1000)
     })
   }
 
