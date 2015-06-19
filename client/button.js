@@ -107,17 +107,27 @@ Template.login.events({
 });
 
 Template.dates.events({
-  'submit form.dates': function (event) {
+  'click input.monthOptions, click input.yearOptions': function (event) {
     var month = $('input[name=monthOptions]:checked').val();
     var year = $('input[name=yearOptions]:checked').val();
     if (month !== undefined && year !== undefined) {
       Meteor.call('getInstagramMedia', +year, +month, function(error, results) {
-        console.log('Instagram response', results.data)
-        Session.set('photos', results.data.data);
+        console.log('Instagram response', results.data);
+        if (results.data.data.length > 0) {
+          Session.set('photos', results.data.data);
+          $('form.dates div.error').hide();
+          $('form.dates button.dates').show();
+        }
+        else {
+          $('form.dates button.dates').hide();
+          $('form.dates div.error').show();
+        }
       });
-      Router.go('photos');
-      _.delay(animate, 2000);
     }
+  },
+  'submit form.dates': function (event) {
+    Router.go('photos');
+    _.delay(animate, 2000);
     return false;
   }
 })

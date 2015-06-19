@@ -15,8 +15,10 @@
             {{/each}}
           </div>
         </div>
-        <div class="error" style="display: none;">Apparently you don't have enough photos to create a statistic from, please choose another month and try again</div>
-        <button type="submit" class="dates" style="display: none;">Start</button>
+        <div class="next">
+          <div class="error" style="display: none;">Apparently you don't have enough photos to create a statistic from, please choose another month and try again</div>
+          <button type="submit" class="dates" style="display: none;">Start</button>
+        </div>
       </form>
     </div>
   </div>
@@ -32,12 +34,12 @@
 
 <template name="month">
   <div class="month-button">
-    <input type="radio" name="monthOptions" id="monthRadio{{val}}" value="{{val}}">
+    <input type="radio" class="monthOptions" name="monthOptions" id="monthRadio{{val}}" value="{{val}}">
     <label class="radio-inline" for="monthRadio{{val}}">{{name}}</label>
   </div>
 </template>
 
 <template name="year">
-  <input type="radio" name="yearOptions" id="yearRadio{{this}}" value="{{this}}">
+  <input type="radio" class="yearOptions" name="yearOptions" id="yearRadio{{this}}" value="{{this}}">
   <label class="radio-inline" for="yearRadio{{this}}">{{this}}</label>
 </template>
