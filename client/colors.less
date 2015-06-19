@@ -7,7 +7,7 @@ body {
       height: auto;
       max-width: 500px;
       margin: 0 auto;
-      margin-top: 190px;
+      margin-top: 85px;
       div.login {
         text-align: center;
         flex: 0 0 auto;
@@ -43,6 +43,9 @@ body {
     }
     div.dates-wrapper {
       div.dates {
+        max-width: 700px;
+        margin: 0 auto;
+        margin-top: 85px;
         h2 {
           color: #2636F9;
           font-size: 3.3em;
@@ -50,6 +53,7 @@ body {
           text-align: center;
         }
         form {
+          margin-top: 65px;
           div.month-row {
             display: -webkit-flex;
             display: flex;
@@ -58,12 +62,15 @@ body {
             div.month-button {
               -webkit-flex-grow: 1;
               flex-grow: 1;
+              text-align: center;
               label.radio-inline {
                 text-align: center;
-                color: #333;
+                color: #999;
                 padding: 10px;
                 font-size: 1.2em;
-                width: 100%;
+                width: 160px;
+                border: 1px #999 solid;
+                margin-bottom: 20px;
               }
               input[type="radio"] {
                 display: none;
@@ -79,7 +86,7 @@ body {
             margin-top: 20px;
             text-align: center;
             label.radio-inline {
-              color: #333;
+              color: #999;
               padding: 9px;
               font-size: 1.6em;
             }
