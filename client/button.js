@@ -2,6 +2,7 @@ function animate() {
   var delay = 0;
 
   // load
+  $('li#step1').addClass('active');
   var photos = $('div.photo');
   photos.each(function(i) {
     var self = this;
@@ -14,7 +15,8 @@ function animate() {
 
   // pixelate
   _.delay(function () {
-    $('h4.step').text('(Step 2)');
+    $('li#step1').removeClass('active');
+    $('li#step2').addClass('active');
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function() {
         $('#img-'+x.id).hide()
@@ -29,7 +31,8 @@ function animate() {
 
   // colorize
   _.delay(function() {
-    $('h4.step').text('(Step 3)');
+    $('li#step2').removeClass('active');
+    $('li#step3').addClass('active');
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function () {
         $('#img-'+x.id).hide()
@@ -43,7 +46,8 @@ function animate() {
   delay += 2000;
 
   _.delay(function() {
-    $('h4.step').text('(Step 4)');
+    $('li#step3').removeClass('active');
+    $('li#step4').addClass('active');
     $('div.photos').hide();
 
     var palette = Effects.average();
@@ -81,7 +85,8 @@ function animate() {
   delay += 2000;
 
   _.delay(function() {
-    $('h4.step').text('(Step 5)');
+    $('li#step4').removeClass('active');
+    $('li#step5').addClass('active');
     $('div.photos').hide();
     $('div.final').show()
 
@@ -162,6 +167,9 @@ Template.photos.events({
 })
 
 Template.photos.helpers({
+  steps: function () {
+    return _.range(1,9);
+  },
   photos: function () {
     return Session.get('photos');
   }

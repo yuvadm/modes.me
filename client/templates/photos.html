@@ -1,6 +1,10 @@
 <template name="photos">
   <div class="photos-wrapper">
-    <h4 class="step">(Step 1)</h4>
+    <ol class="steps">
+      {{#each steps}}
+        {{> step}}
+      {{/each}}
+    </ol>
     <h2 class="title">Processing...</h2>
     <!-- <button class="pixelate btn btn-default">Pixelate</button>
     <button class="color btn btn-default">Color</button>
@@ -27,6 +31,10 @@
     </div>
     <canvas id="canvas-all" style="display: none; height: 150px; width: 150px;"></canvas>
   </div>
+</template>
+
+<template name="step">
+  <li id="step{{this}}" class="step">Step {{this}}</li>
 </template>
 
 <template name="photo">
