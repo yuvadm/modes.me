@@ -215,10 +215,7 @@ Effects = (function() {
         for (var y = 0; y < gridDim; y++) {
           for(var x = 0; x < gridDim; x++) {
             var c = cols[(y * gridDim) + x];
-
             var nc = new paper.Color(c[0], c[1], c[2], 0.5);
-
-            console.log(x, y, nc);
 
             var rec = new paper.Path.Rectangle({
               point: [x * gridSize, y * gridSize],
