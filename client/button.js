@@ -178,5 +178,7 @@ Template.photo.helpers({
 })
 
 Accounts.onLogin(function() {
-  Router.go('dates');
+  if (Router.current().route.getName() == 'login') {
+    Router.go('dates');
+  }
 });
