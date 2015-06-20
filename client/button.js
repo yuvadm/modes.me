@@ -72,6 +72,8 @@ function animate() {
   delay += 2000;
 
   _.delay(function() {
+    $('li#step4').removeClass('active');
+    $('li#step5').addClass('active');
     $('div.dominants').hide();
     $('div.photos').show();
     _.each(Session.get('photos'), function(x, i) {
@@ -85,8 +87,8 @@ function animate() {
   delay += 2000;
 
   _.delay(function() {
-    $('li#step4').removeClass('active');
-    $('li#step5').addClass('active');
+    $('li#step5').removeClass('active');
+    $('li#step6').addClass('active');
     $('div.photos').hide();
     $('div.final').show()
 
