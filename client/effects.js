@@ -240,33 +240,34 @@ Effects = (function() {
     var photos = $('div.photo').length;
 
     var cols = [];
-    _.each(Session.get('photos'), function (x, i) {
-      var id = x.id;
+    _.each(Session.get('photos'), function (p, i) {
+      var id = p.id;
       cols.push(Session.get(id + ':finalcols'));
     });
 
+    // transpose to get pixel color groups
+    cols = _.zip.apply(_, cols);
+
     for (var y = 0; y < gridDim; y++) {
-      for(var x = 0; x < gridDim; x++) {
+      for (var x = 0; x < gridDim; x++) {
+        _.delay(function(x, y) {
 
-        var c = []
-        for (var j = 0; j < photos; j++) {
-          c.push(cols[j][(y * gridDim) + x]);
-        }
+          // get most recurring item/color
+          var col = cols[(y * gridDim) + x];
+          var c = _.chain(col).countBy().pairs().max(_.last).head().value().split(',');
+          var nc = new paper.Color(+c[0], +c[1], +c[2]);
 
-        var freq_col = _.chain(c).countBy().pairs().max(_.last).head().value();
-        freq_col = freq_col.split(',');
-        var nc = new paper.Color(+freq_col[0], +freq_col[1], +freq_col[2]);
+          var rec = new paper.Path.Rectangle({
+            point: [x * gridSize, y * gridSize],
+            size: [gridSize, gridSize],
+            strokeWidth: 0,
+            fillColor: nc
+          });
 
-        var rec = new paper.Path.Rectangle({
-          point: [x * gridSize, y * gridSize],
-          size: [gridSize, gridSize],
-          strokeWidth: 0,
-          fillColor: nc
-        });
+          p.view.draw();
+        }, ((y * gridDim) + x) * 35, x, y);
       }
     }
-    p.view.draw();
-
   }
 
   return {
