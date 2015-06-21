@@ -108,6 +108,17 @@ function animate2() {
     Effects.drawFinalIcon();
   }, delay + 2000);
 
+  delay += 400 * photos.length;
+  delay += 2000;
+
+  _.delay(function() {
+    $('li#step7').removeClass('active');
+    $('li#step8').addClass('active');
+    $('div.final div.final-dominants').hide();
+    $('div.final div.share').show();
+  }, delay + 2000);
+
+
 }
 
 Template.layout.events({
