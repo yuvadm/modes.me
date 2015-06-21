@@ -230,12 +230,52 @@ Effects = (function() {
     })
   }
 
+  function drawFinalIcon() {
+    var canvas = document.getElementById('canvas-final');
+    var p = new paper.PaperScope();
+    p.setup(canvas);
+
+    var gridSize = 35;
+    var gridDim = 9;
+    var photos = $('div.photo').length;
+
+    var cols = [];
+    _.each(Session.get('photos'), function (x, i) {
+      var id = x.id;
+      cols.push(Session.get(id + ':finalcols'));
+    });
+
+    for (var y = 0; y < gridDim; y++) {
+      for(var x = 0; x < gridDim; x++) {
+
+        var c = []
+        for (var j = 0; j < photos; j++) {
+          c.push(cols[j][(y * gridDim) + x]);
+        }
+
+        var freq_col = _.chain(c).countBy().pairs().max(_.last).head().value();
+        freq_col = freq_col.split(',');
+        var nc = new paper.Color(+freq_col[0], +freq_col[1], +freq_col[2]);
+
+        var rec = new paper.Path.Rectangle({
+          point: [x * gridSize, y * gridSize],
+          size: [gridSize, gridSize],
+          strokeWidth: 0,
+          fillColor: nc
+        });
+      }
+    }
+    p.view.draw();
+
+  }
+
   return {
     pixelate: pixelate,
     colorize: colorize,
     average: average,
     averageColor: averageColor,
-    drawFinal: drawFinal
+    drawFinal: drawFinal,
+    drawFinalIcon: drawFinalIcon
   }
 
 })();

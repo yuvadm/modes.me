@@ -93,10 +93,21 @@ function animate2() {
     $('li#step5').removeClass('active');
     $('li#step6').addClass('active');
     $('div.photos').hide();
-    $('div.final').show()
+    $('div.final').show();
 
     Effects.drawFinal();
   }, delay + 2000);
+
+  delay += 1000 * photos.length;
+  delay += 2000;
+
+  _.delay(function() {
+    $('li#step6').removeClass('active');
+    $('li#step7').addClass('active');
+
+    Effects.drawFinalIcon();
+  }, delay + 2000);
+
 }
 
 Template.layout.events({
