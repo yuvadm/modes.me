@@ -194,6 +194,13 @@ Template.photos.events({
   'click button.continue': function (event) {
     animate2();
     return false;
+  },
+  'click button.logout': function (event) {
+    $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
+    Meteor.logout();
+    _.delay(function () {
+      Router.go('login');
+    }, 500);
   }
 })
 
