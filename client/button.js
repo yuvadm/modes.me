@@ -151,16 +151,16 @@ Template.dates.helpers({
 Template.photos.events({
   'click button.pixelate': function (event) {
     _.each(Session.get('photos'), function(x) {
-      $('#img-'+x.id).hide()
       Effects.pixelate(x.id);
-      $('#canvas-'+x.id).show()
+      $('#img-'+x.id).hide();
+      $('#canvas-'+x.id).show();
     })
   },
   'click button.color': function (event) {
     _.each(Session.get('photos'), function(x) {
-      $('#img-'+x.id).hide()
       Effects.colorize(x.id);
-      $('#canvas-'+x.id).show()
+      $('#img-'+x.id).hide();
+      $('#canvas-'+x.id).show();
     })
   },
   'click button.average': function (event) {
