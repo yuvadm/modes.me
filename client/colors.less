@@ -155,6 +155,7 @@ body {
         justify-content: left;
         -webkit-flex-wrap: wrap;
         flex-wrap: wrap;
+        max-width: 700px;
         div.photo {
           margin: 3px 8px;
           width: 54px;
@@ -176,19 +177,34 @@ body {
       }
       div.dominants {
         margin: 0 auto;
-        width: 400px;
+        width: 305px;
         div.dominant {
-          text-align: left;
+          text-align: center;
           flex: 0 0 auto;
+          margin-top: 45px;
           h3 {
             color: #2636F9;
+            font-size: 1.2em;
           }
           div.color {
             background-color: red;
-            height: 72px;
+            height: 50px;
           }
           h5 {
             color: #808080;
+          }
+        }
+        button.continue {
+          font-size: 1.2em;
+          width: 100%;
+          margin-top: 45px;
+          color: #2636F9;
+          padding: 7px 35px;
+          background-color: white;
+          border: 1px #2636F9 solid;
+          &:hover, &:active {
+            color: white;
+            background-color: #2636F9;
           }
         }
       }

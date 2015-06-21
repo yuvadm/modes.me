@@ -68,8 +68,11 @@ function animate() {
 
     $('div.dominants').show();
   }, delay + 2000);
+}
 
-  delay += 2000;
+function animate2() {
+  var delay = 0;
+  var photos = $('div.photo');
 
   _.delay(function() {
     $('li#step4').removeClass('active');
@@ -165,6 +168,10 @@ Template.photos.events({
   },
   'click button.average': function (event) {
     Effects.average();
+  },
+  'click button.continue': function (event) {
+    animate2();
+    return false;
   }
 })
 
@@ -183,7 +190,7 @@ Template.photo.helpers({
     return d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
   },
   proxy: function (url) {
-    return url.replace('https://scontent.cdninstagram.com', '/imgproxy?url=')
+    return url.replace('https://scontent.cdninstagram.com', '/imgproxy?url=');
   }
 })
 
