@@ -19,9 +19,9 @@ function animate() {
     $('li#step2').addClass('active');
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function() {
-        $('#img-'+x.id).hide()
         Effects.pixelate(x.id);
-        $('#canvas-'+x.id).show()
+        $('#img-'+x.id).hide();
+        $('#canvas-'+x.id).show();
       }, 400 * i);
     });
   }, delay + 2000);
@@ -35,9 +35,9 @@ function animate() {
     $('li#step3').addClass('active');
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function () {
-        $('#img-'+x.id).hide()
         Effects.colorize(x.id);
-        $('#canvas-'+x.id).show()
+        $('#img-'+x.id).hide();
+        $('#canvas-'+x.id).show();
       }, 400 * i);
     });
   }, delay + 2000);
