@@ -141,14 +141,41 @@ body {
           }
         }
       }
+
       h2 {
         margin-top: 0px;
-        margin-bottom: 90px;
+        margin-bottom: 20px;
         color: #2636F9;
         font-size: 2.3em;
         font-weight: bold;
         text-align: center;
+        div.sec {
+          color: #333;
+        }
       }
+
+      svg.spinner {
+        display: block;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
+
+      .rect {
+        fill: none;
+        stroke-width: 8px;
+        stroke: #2636F9;
+        stroke-dasharray: 40;
+        stroke-dashoffset: 50%;
+
+        animation: movedash 1.5s forwards 0s infinite;
+      }
+
+      @keyframes movedash {
+        to {
+          stroke-dashoffset: 250%;
+        }
+      }
+
       div.photos {
         display: -webkit-flex;
         display: flex;
@@ -160,20 +187,19 @@ body {
         margin: 0 auto;
         div.photo {
           margin: 3px 8px;
-          width: 54px;
-          height: 74px;
+          width: 72px;
+          height: 92px;
           div.title {
             color: #333;
-            font-size: 0.7em;
             text-align: center;
           }
           img {
-            height: 54px;
-            width: 54px;
+            height: 72px;
+            width: 72px;
           }
           canvas {
-            width: 54px;
-            height: 54px;
+            width: 72px;
+            height: 72px;
           }
         }
       }

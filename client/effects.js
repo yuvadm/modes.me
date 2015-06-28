@@ -6,7 +6,7 @@ Effects = (function() {
 
     var raster = new paper.Raster('img-' + id);
     raster.visible = false;
-    var gridSize = 6;
+    var gridSize = 8;
     var gridDim = 9;
     var cols = [];
 
@@ -77,7 +77,7 @@ Effects = (function() {
     p.setup(canvas);
 
     // params
-    var gridSize = 6;
+    var gridSize = 8;
     var gridDim = 9;
 
     // fetch the new colors
@@ -150,7 +150,7 @@ Effects = (function() {
     p.setup(canvas);
 
     // params
-    var gridSize = 6;
+    var gridSize = 8;
     var gridDim = 9;
 
     var p1 = new paper.Color(palette[0][0] / 256, palette[0][1] / 256, palette[0][2] / 256);

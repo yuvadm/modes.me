@@ -114,6 +114,7 @@ function animate2() {
   _.delay(function() {
     $('li#step7').removeClass('active');
     $('li#step8').addClass('active');
+    $('h2.title').html('Done!<div class="sec">This is your icon!</div>');
     $('div.final div.final-dominants').hide();
     $('div.final div.share').show();
   }, delay + 2000);
