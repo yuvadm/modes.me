@@ -102,9 +102,6 @@ function animate2() {
   delay += 2000;
 
   _.delay(function() {
-    $('li#step6').removeClass('active');
-    $('li#step7').addClass('active');
-
     Effects.drawFinalIcon();
   }, delay + 2000);
 
@@ -112,8 +109,6 @@ function animate2() {
   delay += 2000;
 
   _.delay(function() {
-    $('li#step7').removeClass('active');
-    $('li#step8').addClass('active');
     $('h2.title').html('Done!<div class="sec">This is your icon!</div>');
     $('div.final div.final-dominants').hide();
     $('div.final div.share').show();
@@ -207,7 +202,14 @@ Template.photos.events({
 
 Template.photos.helpers({
   steps: function () {
-    return _.range(1,9);
+    return [
+      {val: 1, name: 'Downloading'},
+      {val: 2, name: 'Pixelate'},
+      {val: 3, name: 'Composition'},
+      {val: 4, name: 'Dominant Color'},
+      {val: 5, name: 'Average'},
+      {val: 6, name: 'Summing'}
+    ]
   },
   photos: function () {
     return Session.get('photos');
