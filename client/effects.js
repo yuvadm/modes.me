@@ -226,7 +226,7 @@ Effects = (function() {
           }
         }
         p.view.draw();
-      }, i * 1000)
+      }, i * 400)
     })
   }
 

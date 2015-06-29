@@ -98,7 +98,7 @@ function animate2() {
     Effects.drawFinal();
   }, delay + 2000);
 
-  delay += 1000 * photos.length;
+  delay += 400 * photos.length;
   delay += 2000;
 
   _.delay(function() {
