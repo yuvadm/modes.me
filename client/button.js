@@ -229,6 +229,24 @@ Template.photo.helpers({
   }
 })
 
+Template.about.events({
+  'click button.start-over': function (event) {
+    if (Meteor.userId()) {
+      Router.go('dates');
+    }
+    else {
+      Router.go('login');
+    }
+  },
+  'click button.logout': function (event) {
+    $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
+    Meteor.logout();
+    _.delay(function () {
+      Router.go('login');
+    }, 500);
+  }
+})
+
 Accounts.onLogin(function() {
   if (Router.current().route.getName() == 'login') {
     Router.go('dates');
