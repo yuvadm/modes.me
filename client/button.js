@@ -142,7 +142,10 @@ Template.dates.events({
       Meteor.call('getInstagramMedia', +year, +month, function(error, results) {
         console.log('Instagram response', results.data);
         if (results.data.data.length > 0) {
-          Session.set('photos', results.data.data);
+          var photos = _.sortBy(results.data.data, function(p) {
+            return p.created_time;
+          });
+          Session.set('photos', photos);
           $('form.dates div.error').hide();
           $('form.dates button.dates').show();
         }
