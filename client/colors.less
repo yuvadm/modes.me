@@ -1,4 +1,15 @@
 body {
+  div.about-link {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    a {
+      padding: 2px 8px;
+      color: #2636F9;
+      border: 1px #2636F9 solid;
+      font-weight: bold;
+    }
+  }
   .page {
     div.login-wrapper {
       display: flex;
@@ -284,7 +295,7 @@ body {
       align-items: center;
       justify-content: center;
       height: auto;
-      max-width: 500px;
+      max-width: 600px;
       margin: 0 auto;
       margin-top: 85px;
       div.about {
@@ -301,13 +312,16 @@ body {
           color: #333;
         }
         div.items {
+          display: -webkit-flex;
           display: flex;
           align-items: center;
+          -webkit-justify-content: center;
           justify-content: center;
           margin-top: 50px;
           div.item {
             flex: 0 0 auto;
-            margin-right: 40px;
+            margin-left: 20px;
+            margin-right: 20px;
             text-align: left;
             font-weight: bold;
             div.title {
