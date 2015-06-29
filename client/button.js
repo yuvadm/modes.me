@@ -112,6 +112,7 @@ function animate2() {
     $('h2.title').html('Done!<div class="sec">This is your icon!</div>');
     $('div.final div.final-dominants').hide();
     $('div.final div.share').show();
+    $('div.about-link').show();
   }, delay + 2000);
 
 
@@ -157,6 +158,7 @@ Template.dates.events({
     }
   },
   'submit form.dates': function (event) {
+    $('div.about-link').hide();
     Router.go('photos');
     _.delay(animate, 2000);
     return false;
