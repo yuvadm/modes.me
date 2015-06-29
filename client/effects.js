@@ -91,36 +91,33 @@ Effects = (function() {
   }
 
   function average() {
-    var canvas = document.getElementById('canvas-all');
-    var p = new paper.PaperScope();
-    p.setup(canvas);
+    var all_colors = _.flatten(
+      _.union(
+        _.map(
+          Session.get('photos'), function (x) {
+            return Session.get(x.id + ':colors');
+          }
+        )
+      ), true  // shallow
+    )
 
-    var i = 0;
-    var photos = $('.instagram-photo');
-    canvas.width = 150;
-    canvas.style.width = 150;
+    var k = new KMeans();
+    k.cluster(all_colors, 2);
+    var centroids = k.centroids;
 
-    _.each(photos, function(x) {
-      var raster = new paper.Raster(x);
-      raster.position = new paper.Size(75, 75);
-      raster.opacity = 1 / photos.length;
-    })
-
-    p.view.draw();
-
-    var quant = new RgbQuant({
-      colors: 2,
-      minHueCols: 16
-    });
-    quant.sample(canvas);
-    var g_palette = quant.palette(true);
-    var g_p1 = new paper.Color(g_palette[0][0] / 256, g_palette[0][1] / 256, g_palette[0][2] / 256);
-    var g_p2 = new paper.Color(g_palette[1][0] / 256, g_palette[1][1] / 256, g_palette[1][2] / 256);
+    var g_p1 = new paper.Color(centroids[0][0] / 256, centroids[0][1] / 256, centroids[0][2] / 256);
+    var g_p2 = new paper.Color(centroids[1][0] / 256, centroids[1][1] / 256, centroids[1][2] / 256);
 
     Session.set('g_p1', g_p1);
     Session.set('g_p2', g_p2);
 
-    return g_palette;
+    centroids = _.map(centroids, function(c) {
+      return _.map(c, function(cc) {
+        return Math.round(cc);
+      })
+    });
+
+    return centroids;
   }
 
   function averageColor(id) {
