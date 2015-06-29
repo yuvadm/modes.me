@@ -25,14 +25,12 @@ Effects = (function() {
             size: [w, h]
           }));
 
-          // console.log(w, h, x, y, color.red, color.green, color.blue);
-
-          cols.push(
+          cols.push([
             Math.round(256 * color.red),
             Math.round(256 * color.green),
             Math.round(256 * color.blue),
-            1 // alpha
-          );
+          ]);
+
           var rec = new paper.Path.Rectangle({
             point: [x * gridSize, y * gridSize],
             size: [gridSize, gridSize],
@@ -44,30 +42,17 @@ Effects = (function() {
 
       p.view.draw();
 
-      cols = new Uint8Array(cols);
+      var k = new KMeans();
+      k.cluster(cols, 2);
+      var centroids = k.centroids;
 
-      var quant = new RgbQuant({
-        colors: 2,
-        minHueCols: 16
-      });
-      quant.sample(cols);
-      var palette = quant.palette(true);
-      var newcolors = quant.reduce(cols);
-
-      // if (window.gb === undefined)
-      //   window.gb = [];
-      // window.gb.push(palette[0][0], palette[0][1], palette[0][2], 0.16);
-      // window.gb.push(palette[1][0], palette[1][1], palette[1][2], 0.16);
-
-      var newcolors2 = [];
-      for (var x=0; x < gridDim * gridDim; x++) {
-        newcolors2.push([newcolors[(x*4)], newcolors[(x*4)+1], newcolors[(x*4)+2]]);
-        // skip dummy alpha value (x*4)+3
-      }
+      var newcols = _.map(cols, function(col) {
+        return centroids[k.classify(col)];
+      })
 
       Session.set(id + ':colors', cols);
-      Session.set(id + ':palette', palette);
-      Session.set(id + ':newcolors', newcolors2);
+      Session.set(id + ':palette', centroids);
+      Session.set(id + ':newcolors', newcols);
     });
   }
 
