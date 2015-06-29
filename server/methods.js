@@ -8,17 +8,5 @@ Meteor.methods({
         'max_timestamp': Math.round(Date.UTC(year, month) / 1000),
       }
     });
-  },
-  reduceColors: function (cols) {
-    // console.log('input', cols.slice(0,8));
-    var quant = new RgbQuant({
-      colors: 2,
-      minHueCols: 2
-    });
-    quant.sample(cols);
-    var palette = quant.palette(true);
-    console.log('palette', palette);
-    var newcolors = quant.reduce(cols);
-    return newcolors;
   }
 });
