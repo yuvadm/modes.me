@@ -42,16 +42,47 @@ Effects = (function() {
 
       p.view.draw();
 
+      var hsvcols = _.map(cols, function(c) {
+        var tc = new tinycolor({r: c[0], g: c[1], b: c[2]});
+        return tc.toHsv()
+      });
+
+      var hscols = _.map(hsvcols, function(c) {
+        return new Array(c.h, c.s);
+      });
+
       var k = new KMeans();
-      k.cluster(cols, 2);
+      k.cluster(hscols, 2);
       var centroids = k.centroids;
 
+      var valued_centroids = _.map(centroids, function(cent, i) {
+        var cluster = _.filter(hsvcols, function(c) {
+          return k.classify(new Array(c.h, c.s)) == i;
+        });
+        var vval = _.reduce(cluster, function(m, c) {
+          return m + c.v;
+        }, 0) / cluster.length;
+        var r = new tinycolor({h: cent[0], s: cent[1], v: vval});
+        var rgb = r.toRgb();
+        return new Array(rgb.r, rgb.g, rgb.b);
+      });
+
+      _.each(hsvcols, function(c) {
+        var hs = new Array(c.h, c.s);
+        var cent = centroids[k.classify(hs)];
+      });
+
       var newcols = _.map(cols, function(col) {
-        return centroids[k.classify(col)];
-      })
+        var c = new tinycolor({r: col[0], g: col[1], b: col[2]});
+        var hsv = c.toHsv();
+        var hs = new Array(hsv.h, hsv.s);
+        return valued_centroids[k.classify(hs)];
+      });
+
+      // console.log(centroids, valued_centroids, cols, newcols);
 
       Session.set(id + ':colors', cols);
-      Session.set(id + ':palette', centroids);
+      Session.set(id + ':palette', valued_centroids);
       Session.set(id + ':newcolors', newcols);
     });
   }
