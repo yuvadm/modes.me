@@ -130,25 +130,48 @@ Effects = (function() {
           }
         )
       ), true  // shallow
-    )
+    );
+
+    var all_colors_hsv = _.map(all_colors, function(col) {
+      var c = new tinycolor({r: col[0], g: col[1], b: col[2]});
+      var hsv = c.toHsv();
+      return hsv;
+      return new Array(hsv.h, hsv.s, hsv.v);
+    });
+
+    var all_colors_hs = _.map(all_colors_hsv, function(hsv) {
+      return new Array(hsv.h, hsv.s);
+    });
 
     var k = new KMeans();
-    k.cluster(all_colors, 2);
+    k.cluster(all_colors_hs, 2);
     var centroids = k.centroids;
 
-    var g_p1 = new paper.Color(centroids[0][0] / 256, centroids[0][1] / 256, centroids[0][2] / 256);
-    var g_p2 = new paper.Color(centroids[1][0] / 256, centroids[1][1] / 256, centroids[1][2] / 256);
+    var valued_centroids = _.map(centroids, function(cent, i) {
+      var cluster = _.filter(all_colors_hsv, function(c) {
+        return k.classify(new Array(c.h, c.s)) == i;
+      });
+      var vval = _.reduce(cluster, function(m, c) {
+        return m + c.v;
+      }, 0) / cluster.length;
+      var r = new tinycolor({h: cent[0], s: cent[1], v: vval});
+      var rgb = r.toRgb();
+      return new Array(rgb.r, rgb.g, rgb.b);
+    });
+
+    var g_p1 = new paper.Color(valued_centroids[0][0] / 256, valued_centroids[0][1] / 256, valued_centroids[0][2] / 256);
+    var g_p2 = new paper.Color(valued_centroids[1][0] / 256, valued_centroids[1][1] / 256, valued_centroids[1][2] / 256);
 
     Session.set('g_p1', g_p1);
     Session.set('g_p2', g_p2);
 
-    centroids = _.map(centroids, function(c) {
+    valued_centroids = _.map(valued_centroids, function(c) {
       return _.map(c, function(cc) {
         return Math.round(cc);
       })
     });
 
-    return centroids;
+    return valued_centroids;
   }
 
   function averageColor(id) {
