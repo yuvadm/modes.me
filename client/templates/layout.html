@@ -1,6 +1,11 @@
 <template name="layout">
-  <div class="about-link">
-    <a href="/about">i</a>
+  <div class="header">
+    <img class="logo" src="/img/logo_anim.gif">
+    <div class="links">
+      <a href="/about">About</a> /
+      <a class="logout" href="#">Logout</a>
+      <img class="profile" src="https://instagramimages-a.akamaihd.net/profiles/anonymousUser.jpg">
+    </div>
   </div>
   <div class="page">
 {{> yield}}

@@ -196,6 +196,18 @@ Template.photos.events({
     animate2();
     return false;
   },
+  'click button.share-instagram': function (event) {
+    window.print();
+  },
+  'click button.share-facebook': function (event) {
+    window.print();
+  },
+  'click button.share-save': function (event) {
+    window.print();
+  },
+  'click button.share-print': function (event) {
+    window.print();
+  },
   'click button.logout': function (event) {
     $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
     Meteor.logout();
@@ -250,6 +262,10 @@ Template.about.events({
 })
 
 Accounts.onLogin(function() {
+  Meteor.call('getInstagramProfilePhoto', function(error, res) {
+    console.log(res);
+    $('img.profile').attr('src', res);
+  });
   if (Router.current().route.getName() == 'login') {
     Router.go('dates');
   }

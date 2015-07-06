@@ -8,5 +8,8 @@ Meteor.methods({
         'max_timestamp': Math.round(Date.UTC(year, month) / 1000),
       }
     });
+  },
+  getInstagramProfilePhoto: function () {
+    return Meteor.user().services.instagram.profile_picture;
   }
 });
