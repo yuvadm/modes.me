@@ -220,12 +220,12 @@ Template.photos.events({
 Template.photos.helpers({
   steps: function () {
     return [
-      {val: 1, name: 'Downloading'},
+      {val: 1, name: 'Original'},
       {val: 2, name: 'Pixelate'},
       {val: 3, name: 'Composition'},
       {val: 4, name: 'Dominant Color'},
       {val: 5, name: 'Average'},
-      {val: 6, name: 'Summing'}
+      {val: 6, name: 'Summarize'}
     ]
   },
   photos: function () {
