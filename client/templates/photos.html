@@ -5,16 +5,6 @@
         {{> step}}
       {{/each}}
     </ol>
-    <h2 class="title">
-      Processing...
-      <svg class="spinner" width="20" height="20" viewbox="0 0 40 40">
-        <!-- <rect width="40" height="40" class="rect" />  <- this looks buggy in retina safari -->
-        <polygon points="0 0 0 40 40 40 40 0" class="rect" />
-      </svg>
-    </h2>
-    <!-- <button class="pixelate btn btn-default">Pixelate</button>
-    <button class="color btn btn-default">Color</button>
-    <button class="average btn btn-default">Average</button> -->
     <div class="photos">
       {{#each photos}}
         {{> photo}}
