@@ -232,7 +232,7 @@ Template.photos.events({
     var d2 = Session.get('dominant2hex');
 
     printStr += d1;
-    printStr += d2;
+    printStr += d2 + '|';
 
     var bin2hex = function(b) {
       return _.map(
