@@ -132,6 +132,16 @@ Template.login.events({
   }
 });
 
+Template.layout.events({
+  'click a.logout': function (event) {
+    $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
+    Meteor.logout();
+    _.delay(function () {
+      Router.go('login');
+    }, 500);
+  }
+})
+
 Template.dates.events({
   'click input.monthOptions, click input.yearOptions': function (event) {
     var month = $('input[name=monthOptions]:checked').val();
@@ -204,13 +214,6 @@ Template.photos.events({
   },
   'click button.share-print': function (event) {
     window.print();
-  },
-  'click button.logout': function (event) {
-    $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
-    Meteor.logout();
-    _.delay(function () {
-      Router.go('login');
-    }, 500);
   }
 })
 
@@ -260,7 +263,6 @@ Template.about.events({
 
 Accounts.onLogin(function() {
   Meteor.call('getInstagramProfilePhoto', function(error, res) {
-    console.log(res);
     $('img.profile').attr('src', res);
   });
   if (Router.current().route.getName() == 'login') {
