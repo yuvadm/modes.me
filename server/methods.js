@@ -1,3 +1,5 @@
+Prints = new Mongo.Collection('prints');
+
 Meteor.methods({
   getInstagramMedia: function (year, month) {
     this.unblock();
@@ -12,10 +14,15 @@ Meteor.methods({
   getInstagramProfilePhoto: function () {
     return Meteor.user().services.instagram.profile_picture;
   },
-  printFinalImage: function(code) {
+  printFinalImage: function (code) {
     if (Meteor.userId()) {
       var username = Meteor.user().services.instagram.username;
-      console.log('Printing', username + '|' + code);
+      var data = username + '|' + code;
+      Prints.insert({
+        data: data,
+        ip: this.connection.clientAddress,
+        ts: new Date().getTime()
+      })
     }
   }
 });
