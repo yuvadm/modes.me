@@ -15,7 +15,7 @@ Meteor.methods({
   printFinalImage: function(code) {
     if (Meteor.userId()) {
       var username = Meteor.user().services.instagram.username;
-      console.log('Printing', username + code);
+      console.log('Printing', username + '|' + code);
     }
   }
 });

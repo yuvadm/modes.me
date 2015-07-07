@@ -226,16 +226,16 @@ Template.photos.events({
   'click button.share-print': function (event) {
     var date = Session.get('date');
     var printStr = date.month < 10 ? '0' + date.month : date.month;
-    printStr += date.year;
+    printStr += date.year + '|';
 
-    var dominant1 = Session.get('dominant1hex');
-    var dominant2 = Session.get('dominant2hex');
+    var d1 = Session.get('dominant1hex');
+    var d2 = Session.get('dominant2hex');
 
-    printStr += dominant1;
-    printStr += dominant2;
+    printStr += d1;
+    printStr += d2;
 
     var bin2hex = function(b) {
-      _.map(
+      return _.map(
         _.groupBy(b, function(e, i){
           return Math.floor(i/4);
         }), function (g) {
@@ -245,20 +245,20 @@ Template.photos.events({
     }
 
     var matrix = Session.get('final_matrix');
-    var code = "111" + _.map(matrix, function (col) {  // add three high bits for padding
+    var code = _.map(matrix, function (col) {
       var hex = _.map(col, function (c) {
         return Math.round(c*256).toString(16).toUpperCase();
       }).join('');
-      if (hex == dominant1) { return '0'; }
-      if (hex == dominant2) { return '1'; }
+      if (hex == d1) { return '0'; }
+      if (hex == d2) { return '1'; }
       else {
-        console.log('error', hex, dominant1, dominant2);
+        console.log('error', hex, d1, d2);
       }
     });
 
-    printStr += code;
+    printStr += bin2hex([1,1,1].concat(code));  // add three high bits for padding
 
-    Meteor.call('printFinalImage', date.month, date.year, bin2hex(code));
+    Meteor.call('printFinalImage', printStr);
   }
 })
 
