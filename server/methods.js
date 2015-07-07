@@ -11,5 +11,11 @@ Meteor.methods({
   },
   getInstagramProfilePhoto: function () {
     return Meteor.user().services.instagram.profile_picture;
+  },
+  printFinalImage: function(month, year, matrix) {
+    if (Meteor.userId()) {
+      var username = Meteor.user().services.instagram.username;
+      console.log('Printing', username, month, year, matrix);
+    }
   }
 });

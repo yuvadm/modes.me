@@ -157,7 +157,10 @@ Template.dates.events({
           var photos = _.sortBy(results.data.data, function(p) {
             return p.created_time;
           });
+
+          Session.set('date', { month: month, year: year });
           Session.set('photos', photos);
+
           $('form.dates div.error').hide();
           $('form.dates button.dates').show();
         }
@@ -214,10 +217,11 @@ Template.photos.events({
     window.print();
   },
   'click button.share-save': function (event) {
-
+    window.print();
   },
   'click button.share-print': function (event) {
-    window.print();
+    var date = Session.get('date');
+    Meteor.call('printFinalImage', date.month, date.year, [[1,2,3], [4,5,6]]);
   }
 })
 
