@@ -63,6 +63,9 @@ function animate() {
     $('ol#dominant2 li.g').text('G-' + palette[1][1].toString(16).toUpperCase());
     $('ol#dominant2 li.b').text('B-' + palette[1][2].toString(16).toUpperCase());
 
+    Session.set('dominant1hex', palette[0][0].toString(16).toUpperCase() + palette[0][1].toString(16).toUpperCase() + palette[0][2].toString(16).toUpperCase());
+    Session.set('dominant2hex', palette[1][0].toString(16).toUpperCase() + palette[1][1].toString(16).toUpperCase() + palette[1][2].toString(16).toUpperCase());
+
     $('div.dominants').show();
   }, delay + 2000);
 }
@@ -99,7 +102,8 @@ function animate2() {
   delay += 2000;
 
   _.delay(function() {
-    Effects.drawFinalIcon();
+    var matrix = Effects.drawFinalIcon();
+    Session.set('final_matrix', matrix);
   }, delay + 2000);
 
   delay += 400 * photos.length;
@@ -221,7 +225,40 @@ Template.photos.events({
   },
   'click button.share-print': function (event) {
     var date = Session.get('date');
-    Meteor.call('printFinalImage', date.month, date.year, [[1,2,3], [4,5,6]]);
+    var printStr = date.month < 10 ? '0' + date.month : date.month;
+    printStr += date.year;
+
+    var dominant1 = Session.get('dominant1hex');
+    var dominant2 = Session.get('dominant2hex');
+
+    printStr += dominant1;
+    printStr += dominant2;
+
+    var bin2hex = function(b) {
+      _.map(
+        _.groupBy(b, function(e, i){
+          return Math.floor(i/4);
+        }), function (g) {
+          return parseInt(g.join(''), 2).toString(16);
+        }
+      ).join('');
+    }
+
+    var matrix = Session.get('final_matrix');
+    var code = "111" + _.map(matrix, function (col) {  // add three high bits for padding
+      var hex = _.map(col, function (c) {
+        return Math.round(c*256).toString(16).toUpperCase();
+      }).join('');
+      if (hex == dominant1) { return '0'; }
+      if (hex == dominant2) { return '1'; }
+      else {
+        console.log('error', hex, dominant1, dominant2);
+      }
+    });
+
+    printStr += code;
+
+    Meteor.call('printFinalImage', date.month, date.year, bin2hex(code));
   }
 })
 

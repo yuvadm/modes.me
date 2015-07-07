@@ -285,14 +285,16 @@ Effects = (function() {
 
     // transpose to get pixel color groups
     cols = _.zip.apply(_, cols);
+    final_cols = _.map(cols, function(col) {
+      return _.chain(col).countBy().pairs().max(_.last).head().value().split(',');
+    })
 
     for (var y = 0; y < gridDim; y++) {
       for (var x = 0; x < gridDim; x++) {
         _.delay(function(x, y) {
 
           // get most recurring item/color
-          var col = cols[(y * gridDim) + x];
-          var c = _.chain(col).countBy().pairs().max(_.last).head().value().split(',');
+          var c = final_cols[(y * gridDim) + x];
           var nc = new paper.Color(+c[0], +c[1], +c[2]);
 
           var rec = new paper.Path.Rectangle({
@@ -306,6 +308,8 @@ Effects = (function() {
         }, ((y * gridDim) + x) * 35, x, y);
       }
     }
+
+    return final_cols;
   }
 
   return {
