@@ -105,13 +105,17 @@ function animate2() {
   delay += 400 * photos.length;
   delay += 2000;
 
+  var canvas = document.getElementById('canvas-final');
+  var dataUrl = canvas.toDataURL();
+  $('a.share-save').attr('href', dataUrl);
+  $('a.share-save').attr('download', new Date().getTime());
+
   _.delay(function() {
     $('h2.title').html('Done!<div class="sec">This is your icon!</div>');
     $('div.final div.final-dominants').hide();
     $('div.final div.share').show();
     $('div.about-link').show();
   }, delay + 2000);
-
 
 }
 
@@ -210,7 +214,7 @@ Template.photos.events({
     window.print();
   },
   'click button.share-save': function (event) {
-    window.print();
+
   },
   'click button.share-print': function (event) {
     window.print();

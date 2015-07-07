@@ -84,6 +84,8 @@ Effects = (function() {
       Session.set(id + ':colors', cols);
       Session.set(id + ':palette', valued_centroids);
       Session.set(id + ':newcolors', newcols);
+
+      canvas.style.position = 'static';
     });
   }
 
