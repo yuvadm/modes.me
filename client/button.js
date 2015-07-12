@@ -116,7 +116,12 @@ function animate2() {
 
   _.delay(function() {
     $('h2.title').html('Done!<div class="sec">This is your icon!</div>');
+    $('span.final-username').text(Session.get('username'));
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    $('span.final-date').text(months[Session.get('date').month-1] + ' ' + Session.get('date').year);
     $('div.final div.final-dominants').hide();
+
+    $('div.final-userdate').show();
     $('div.final div.share').show();
     $('div.about-link').show();
   }, delay + 2000);
@@ -165,6 +170,10 @@ Template.dates.events({
 
           Session.set('date', { month: month, year: year });
           Session.set('photos', photos);
+
+          Meteor.call('getInstagramUsername', function (err, res) {
+            Session.set('username', res);
+          });
 
           $('form.dates div.error').hide();
           $('form.dates button.dates').show();

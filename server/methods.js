@@ -11,6 +11,9 @@ Meteor.methods({
       }
     });
   },
+  getInstagramUsername: function () {
+    return Meteor.user().services.instagram.username;
+  },
   getInstagramProfilePhoto: function () {
     return Meteor.user().services.instagram.profile_picture;
   },
