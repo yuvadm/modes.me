@@ -126,6 +126,7 @@ function animate2() {
 Template.layout.events({
   'click .logout': function (event) {
     Meteor.logout();
+    $('div.header img.profile').attr('src', 'https://instagramimages-a.akamaihd.net/profiles/anonymousUser.jpg');
     Router.go('login');
   }
 })
