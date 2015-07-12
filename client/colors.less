@@ -149,6 +149,21 @@ body {
       }
     }
     div.photos-wrapper {
+      a.start-over {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        font-family: 'Cutive Mono', serif;
+        color: black;
+        border-bottom: 1px black solid;
+        &:hover, &:active {
+          color: white;
+          background-color: black;
+        }
+      }
       ol.steps {
         display: block;
         text-align: center;
