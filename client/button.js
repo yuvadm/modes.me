@@ -287,25 +287,7 @@ Template.photo.helpers({
   proxy: function (url) {
     return url.replace('https://scontent.cdninstagram.com', '/imgproxy?url=');
   }
-})
-
-Template.about.events({
-  'click button.start-over': function (event) {
-    if (Meteor.userId()) {
-      Router.go('dates');
-    }
-    else {
-      Router.go('login');
-    }
-  },
-  'click button.logout': function (event) {
-    $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
-    Meteor.logout();
-    _.delay(function () {
-      Router.go('login');
-    }, 500);
-  }
-})
+});
 
 Accounts.onLogin(function() {
   Meteor.call('getInstagramProfilePhoto', function(error, res) {

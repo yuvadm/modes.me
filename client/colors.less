@@ -22,6 +22,21 @@ body {
     }
   }
   .page {
+    a.start-over {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      font-family: 'Cutive Mono', serif;
+      color: black;
+      border-bottom: 1px black solid;
+      &:hover, &:active {
+        color: white;
+        background-color: black;
+      }
+    }
     div.login-wrapper {
       display: flex;
       align-items: center;
@@ -149,21 +164,6 @@ body {
       }
     }
     div.photos-wrapper {
-      a.start-over {
-        position: fixed;
-        left: 0;
-        top: 50%;
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-        font-family: 'Cutive Mono', serif;
-        color: black;
-        border-bottom: 1px black solid;
-        &:hover, &:active {
-          color: white;
-          background-color: black;
-        }
-      }
       ol.steps {
         display: block;
         text-align: center;
@@ -316,41 +316,53 @@ body {
       align-items: center;
       justify-content: center;
       height: auto;
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
-      margin-top: 85px;
+      margin-top: 35px;
       div.about {
         text-align: center;
         h1 {
-          color: #2636F9;
-          font-size: 3.5em;
+          color: black;
+          font-size: 2.5em;
           font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
         }
         h2 {
-          margin: 30px 10px 0px 10px;
-          font-size: 2em;
+          margin-top: 50px;
+          font-size: 4em;
+          width: 600px;
+          text-align: left;
           font-weight: bold;
           color: #333;
         }
+        hr {
+          margin-top: 110px;
+          height: 3px;
+          color: black;
+          background-color: black;
+        }
         div.items {
-          display: -webkit-flex;
-          display: flex;
-          align-items: center;
-          -webkit-justify-content: center;
-          justify-content: center;
-          margin-top: 50px;
+          margin-top: 20px;
+          div.left {
+            float: left;
+            div.item {
+              margin-right: 30px;
+            }
+          }
+          div.right {
+            float: right;
+          }
           div.item {
-            flex: 0 0 auto;
-            margin-left: 20px;
-            margin-right: 20px;
+            display: inline-block;
             text-align: left;
-            font-weight: bold;
             div.title {
               color: #333;
               font-size: 1em;
+              font-weight: bold;
             }
             div.content a {
-              color: #2636F9;
+              color: #999;
             }
           }
         }
