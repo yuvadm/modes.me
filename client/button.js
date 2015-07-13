@@ -225,13 +225,10 @@ Template.photos.events({
     return false;
   },
   'click button.share-instagram': function (event) {
-    window.print();
+    return false;
   },
   'click button.share-facebook': function (event) {
-    window.print();
-  },
-  'click button.share-save': function (event) {
-    window.print();
+    return false;
   },
   'click button.share-print': function (event) {
     var date = Session.get('date');
@@ -269,6 +266,7 @@ Template.photos.events({
     printStr += bin2hex([1,1,1].concat(code));  // add three high bits for padding
 
     Meteor.call('printFinalImage', printStr);
+    return false;
   }
 })
 
