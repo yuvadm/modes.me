@@ -28,10 +28,12 @@
           </div>
         </div>
       </div>
-      <form class="date-form">
-        <input type="hidden" name="month" id="month" value="01">
-        <input type="hidden" name="year" id="year" value="15">
-      </form>
     </div>
+    <form class="dates">
+      <input type="hidden" name="month" id="month" value="01">
+      <input type="hidden" name="year" id="year" value="15">
+      <div class="error" style="display: none;">Apparently you don't have enough photos to create a statistic from, please choose another month and try again</div>
+      <button class="next" style="display: none;">Start</button>
+    </form>
   </div>
 </template>

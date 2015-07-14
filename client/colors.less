@@ -103,7 +103,7 @@ body {
         .month-wrapper {
           overflow: scroll;
           float: left;
-          height: 410px;
+          height: 250px;
           position: relative;
           width: 420px;
           -webkit-overflow-scrolling: touch;
@@ -121,7 +121,7 @@ body {
         .year-wrapper {
           overflow: scroll;
           float: left;
-          height: 410px;
+          height: 250px;
           position: relative;
           width: 420px;
           -webkit-overflow-scrolling: touch;
@@ -133,16 +133,42 @@ body {
         }
 
         .month {
-          height: 410px;
+          height: 250px;
           overflow: hidden;
           width: 390px;
           text-align: right;
         }
 
         .year {
-          height: 410px;
+          height: 250px;
           overflow: hidden;
           width: 390px;
+        }
+      }
+      form.dates {
+        display: block;
+        div.error {
+          font-family: 'Cutive Mono', serif;
+          text-align: center;
+          width: 600px;
+          margin: 0 auto;
+        }
+        button.next {
+          margin: 0 auto;
+          display: block;
+          font-size: 2.8em;
+          font-weight: bold;
+          line-height: 1.3em;
+          margin-bottom: 14px;
+          padding: 0px 3px;
+          color: black;
+          background-color: white;
+          border: 0px;
+          border-bottom: 6px black solid;
+          &:hover, &:active {
+            color: white;
+            background-color: black;
+          }
         }
       }
     }

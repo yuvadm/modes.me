@@ -1,3 +1,32 @@
+function prepareDates() {
+  var month = $('input[name=month]').val();
+  var year = $('input[name=year]').val();
+  if (month !== undefined && year !== undefined) {
+    Meteor.call('getInstagramMedia', +("20"+year), +month, function(error, results) {
+      // console.log('Instagram response', results.data);
+      if (results.data.data.length > 0) {
+        var photos = _.sortBy(results.data.data, function(p) {
+          return p.created_time;
+        });
+
+        Session.set('date', { month: month, year: year });
+        Session.set('photos', photos);
+
+        Meteor.call('getInstagramUsername', function (err, res) {
+          Session.set('username', res);
+        });
+
+        $('form.dates div.error').hide();
+        $('form.dates button.next').show();
+      }
+      else {
+        $('form.dates button.next').hide();
+        $('form.dates div.error').show();
+      }
+    });
+  }
+}
+
 function animate() {
   var delay = 0;
 
@@ -157,33 +186,59 @@ Template.layout.events({
 })
 
 Template.dates.events({
-  'click input.monthOptions, click input.yearOptions': function (event) {
-    var month = $('input[name=monthOptions]:checked').val();
-    var year = $('input[name=yearOptions]:checked').val();
-    if (month !== undefined && year !== undefined) {
-      Meteor.call('getInstagramMedia', +year, +month, function(error, results) {
-        console.log('Instagram response', results.data);
-        if (results.data.data.length > 0) {
-          var photos = _.sortBy(results.data.data, function(p) {
-            return p.created_time;
-          });
+  'scroll .month-wrapper': function (e) {
+    var elements = $('.month-wrapper').find('.month').length;
+    var totalheight = $('.month-wrapper').css('height').replace('px','') * elements;
+    var elementheight = totalheight/elements;
+    var offset = e.target.scrollTop;
+    var distance;
 
-          Session.set('date', { month: month, year: year });
-          Session.set('photos', photos);
-
-          Meteor.call('getInstagramUsername', function (err, res) {
-            Session.set('username', res);
-          });
-
-          $('form.dates div.error').hide();
-          $('form.dates button.dates').show();
-        }
-        else {
-          $('form.dates button.dates').hide();
-          $('form.dates div.error').show();
-        }
-      });
+    lastclosest = 9999;
+    lastclosestelement = 0;
+    for (i=0;i<elements;i++) {
+      distance = Math.abs(offset - (i * elementheight));
+      if (distance < lastclosest) {
+        lastclosest = distance;
+        lastclosestelement = i;
+      }
     }
+
+    if (window.datesTimeout !== undefined)
+      clearTimeout(window.datesTimeout);
+    window.datesTimeout = setTimeout(function(){
+      $('.month-wrapper').animate({ scrollTop: lastclosestelement * elementheight+"px"});
+      $('#month').val($('.month').eq(lastclosestelement).html());
+      prepareDates();
+    }, 200);
+
+    lastOffsetMonth = e.target.scrollTop;
+  },
+  'scroll .year-wrapper': function (e) {
+    var elements = $('.year-wrapper').find('.year').length;
+    var totalheight = $('.year-wrapper').css('height').replace('px','') * elements;
+    var elementheight = totalheight/elements;
+    var offset = e.target.scrollTop;
+    var distance;
+
+    lastclosest = 9999;
+    lastclosestelement = 0;
+    for (i=0;i<elements;i++) {
+      distance = Math.abs(offset - (i * elementheight));
+      if (distance < lastclosest) {
+        lastclosest = distance;
+        lastclosestelement = i;
+      }
+    }
+
+    if (window.datesTimeout !== undefined)
+      clearTimeout(window.datesTimeout);
+    window.datesTimeout = setTimeout(function(){
+      $('.year-wrapper').animate({ scrollTop: lastclosestelement * elementheight+"px" });
+      $('#year').val($('.year').eq(lastclosestelement).html());
+      prepareDates();
+    }, 200);
+
+    lastOffsetYear = e.target.scrollTop;
   },
   'submit form.dates': function (event) {
     $('div.about-link').hide();
