@@ -84,83 +84,65 @@ body {
     }
     div.dates-wrapper {
       div.dates {
-        max-width: 700px;
-        margin: 0 auto;
-        margin-top: 85px;
-        h2 {
-          color: #2636F9;
-          font-size: 3.3em;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        .date {
+          height: 430px;
+          font-size: 16em;
           font-weight: bold;
-          text-align: center;
+          color: black;
+          display: inline-block;
+          height: 414px;
+          margin-top: 60px;
         }
-        form {
-          margin-top: 65px;
-          div.month-row {
-            display: -webkit-flex;
-            display: flex;
-            -webkit-justify-content: center;
-            justify-content: center;
-            div.month-button {
-              -webkit-flex-grow: 1;
-              flex-grow: 1;
-              text-align: center;
-              label.radio-inline {
-                text-align: center;
-                color: #999;
-                padding: 10px;
-                font-size: 1.2em;
-                width: 160px;
-                border: 1px #999 solid;
-                margin-bottom: 20px;
-              }
-              input[type="radio"] {
-                display: none;
-                &:checked + label.radio-inline {
-                  color: #fff;
-                  background-color: #2636F9;
-                  border: 0px;
-                }
-              }
-            }
-          }
-          div.years {
-            margin-top: 20px;
-            text-align: center;
-            label.radio-inline {
-              color: #999;
-              padding: 9px 40px;
-              font-size: 1.6em;
-            }
-            input[type="radio"] {
-              display: none;
-              &:checked + label.radio-inline {
-                color: #2636F9;
-                font-weight: bold;
-              }
-            }
-          }
-          div.next {
-            text-align: center;
-            div.error {
-              color: #2636F9;
-              width: 400px;
-              margin: 0 auto;
-              margin-top: 30px;
-            }
-            button.dates {
-              font-size: 1.2em;
-              width: 130px;
-              margin-top: 20px;
-              color: #2636F9;
-              padding: 7px 35px;
-              background-color: white;
-              border: 1px #2636F9 solid;
-              &:hover, &:active {
-                color: white;
-                background-color: #2636F9;
-              }
-            }
-          }
+
+        .month-wrapper {
+          overflow: scroll;
+          float: left;
+          height: 410px;
+          position: relative;
+          width: 420px;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .all-months {
+          position: absolute;
+          top:0;
+        }
+
+        .slash {
+          float:left;
+        }
+
+        .year-wrapper {
+          overflow: scroll;
+          float: left;
+          height: 410px;
+          position: relative;
+          width: 420px;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .all-years {
+          position: absolute;
+          top:0;
+        }
+
+        .month {
+          height: 410px;
+          overflow: hidden;
+          width: 390px;
+          text-align: right;
+        }
+
+        .year {
+          height: 410px;
+          overflow: hidden;
+          width: 390px;
         }
       }
     }

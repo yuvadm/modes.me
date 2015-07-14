@@ -1,45 +1,37 @@
 <template name="dates">
   <div class="dates-wrapper">
     <div class="dates">
-      <h2>Choose a month and a year</h2>
-      <form class="dates">
-        <div class="form-group">
-          {{#each months}}
-            {{> row}}
-          {{/each}}
-        </div>
-        <div class="form-group">
-          <div class="years">
-            {{#each years}}
-              {{> year}}
-            {{/each}}
+      <div class="date">
+        <div class="month-wrapper">
+          <div class="all-months">
+            <div class="month">01</div>
+            <div class="month">02</div>
+            <div class="month">03</div>
+            <div class="month">04</div>
+            <div class="month">05</div>
+            <div class="month">06</div>
+            <div class="month">07</div>
+            <div class="month">08</div>
+            <div class="month">09</div>
+            <div class="month">10</div>
+            <div class="month">11</div>
+            <div class="month">12</div>
           </div>
         </div>
-        <div class="next">
-          <div class="error" style="display: none;">Apparently you don't have enough photos to create a statistic from, please choose another month and try again</div>
-          <button type="submit" class="dates" style="display: none;">Start</button>
+        <div class="slash">/</div>
+        <div class="year-wrapper">
+          <div class="all-years">
+            <div class="year">12</div>
+            <div class="year">13</div>
+            <div class="year">14</div>
+            <div class="year">15</div>
+          </div>
         </div>
+      </div>
+      <form class="date-form">
+        <input type="hidden" name="month" id="month" value="01">
+        <input type="hidden" name="year" id="year" value="15">
       </form>
     </div>
   </div>
-</template>
-
-<template name="row">
-  <div class="month-row">
-  {{#each this}}
-    {{> month}}
-  {{/each}}
-  </div>
-</template>
-
-<template name="month">
-  <div class="month-button">
-    <input type="radio" class="monthOptions" name="monthOptions" id="monthRadio{{val}}" value="{{val}}">
-    <label class="radio-inline" for="monthRadio{{val}}">{{name}}</label>
-  </div>
-</template>
-
-<template name="year">
-  <input type="radio" class="yearOptions" name="yearOptions" id="yearRadio{{this}}" value="{{this}}">
-  <label class="radio-inline" for="yearRadio{{this}}">{{this}}</label>
 </template>
