@@ -30,6 +30,8 @@ function prepareDates() {
 function animate() {
   var delay = 0;
 
+  $('img.logo').attr('src', '/img/logo_anim.gif');
+
   // load
   $('li#step1').addClass('active');
   var photos = $('div.photo');
@@ -95,6 +97,8 @@ function animate() {
     Session.set('dominant1hex', palette[0][0].toString(16).toUpperCase() + palette[0][1].toString(16).toUpperCase() + palette[0][2].toString(16).toUpperCase());
     Session.set('dominant2hex', palette[1][0].toString(16).toUpperCase() + palette[1][1].toString(16).toUpperCase() + palette[1][2].toString(16).toUpperCase());
 
+    $('img.logo').attr('src', '/img/logo.jpg');
+
     $('div.dominants').show();
   }, delay + 2000);
 }
@@ -102,6 +106,8 @@ function animate() {
 function animate2() {
   var delay = 0;
   var photos = $('div.photo');
+
+  $('img.logo').attr('src', '/img/logo_anim.gif');
 
   _.delay(function() {
     $('li#step4').removeClass('active');
@@ -149,6 +155,8 @@ function animate2() {
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     $('span.final-date').text(months[Session.get('date').month-1] + ' ' + Session.get('date').year);
     $('div.final div.final-dominants').hide();
+
+    $('img.logo').attr('src', '/img/logo.jpg');
 
     $('div.final-userdate').show();
     $('div.final div.share').show();
