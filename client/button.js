@@ -299,7 +299,7 @@ Template.photos.events({
   },
   'click button.share-print': function (event) {
     var date = Session.get('date');
-    var printStr = date.month < 10 ? '0' + date.month : date.month;
+    var printStr = date.month;
     printStr += date.year + '|';
 
     var d1 = Session.get('dominant1hex');
