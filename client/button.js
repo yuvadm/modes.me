@@ -11,6 +11,14 @@ Router.onRun(function () {
   this.next();
 }, { only: ['login'] });
 
+Router.onRun(function () {
+  $(document).ready(function () {
+    $('div.all-months').offset({ top: -1142 });
+    $('div.all-years').offset({ top: -392 });
+  });
+  this.next();
+}, { only: ['dates'] });
+
 function prepareDates() {
   var month = $('input[name=month]').val();
   var year = $('input[name=year]').val();
