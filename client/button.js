@@ -63,9 +63,11 @@ function animate() {
     $('li#step2').addClass('active');
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function() {
-        Effects.pixelate(x.id);
-        $('#img-'+x.id).hide();
         $('#canvas-'+x.id).show();
+        Effects.pixelate(x.id);
+        _.delay(function () {
+          $('#img-'+x.id).hide();
+        }, 100);
       }, 400 * i);
     });
   }, delay + 2000);
@@ -80,7 +82,6 @@ function animate() {
     _.each(Session.get('photos'), function(x, i) {
       _.delay(function () {
         Effects.colorize(x.id);
-        $('#img-'+x.id).hide();
         $('#canvas-'+x.id).show();
       }, 400 * i);
     });

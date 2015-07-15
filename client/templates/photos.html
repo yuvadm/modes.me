@@ -65,8 +65,8 @@
 
 <template name="photo">
   <div class="photo" style="display: none;">
+    <canvas id="canvas-{{id}}" style="position: absolute; height: 153px; width: 153px;"></canvas>
     <img id="img-{{id}}" class="instagram-photo" src="{{proxy images.thumbnail.url}}" crossorigin="anonymous">
-    <canvas id="canvas-{{id}}" style="position: absolute; left: -9999px; height: 150px; width: 150px;"></canvas>
     <div class="title">{{date}}</div>
   </div>
 </template>
