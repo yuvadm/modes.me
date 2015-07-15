@@ -296,12 +296,6 @@ Template.photos.events({
     animate2();
     return false;
   },
-  'click button.share-instagram': function (event) {
-    return false;
-  },
-  'click button.share-facebook': function (event) {
-    return false;
-  },
   'click button.share-print': function (event) {
     var date = Session.get('date');
     var printStr = date.month < 10 ? '0' + date.month : date.month;
