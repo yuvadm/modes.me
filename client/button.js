@@ -272,7 +272,7 @@ Template.dates.helpers({
     {val: 5, name: 'May'}, {val: 6, name: 'June'}, {val: 7, name: 'July'}, {val: 8, name: 'August'},
     {val: 9, name: 'September'}, {val: 10, name: 'October'}, {val: 11, name: 'November'}, {val: 12, name: 'December'},
   ],
-  years: _.range(2012, 2016)
+  years: _.range(2011, 2016)
 })
 
 Template.photos.events({
