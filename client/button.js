@@ -174,11 +174,18 @@ function animate2() {
 
 }
 
+function doLogout() {
+  $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
+  $('div.header img.profile').attr('src', 'https://instagramimages-a.akamaihd.net/profiles/anonymousUser.jpg');
+  Meteor.logout();
+  _.delay(function () {
+    Router.go('login');
+  }, 500);
+}
+
 Template.layout.events({
   'click .logout': function (event) {
-    Meteor.logout();
-    $('div.header img.profile').attr('src', 'https://instagramimages-a.akamaihd.net/profiles/anonymousUser.jpg');
-    Router.go('login');
+    doLogout();
   }
 })
 
@@ -191,16 +198,6 @@ Template.login.events({
     return false;
   }
 });
-
-Template.layout.events({
-  'click a.logout': function (event) {
-    $('body').append('<div style="display:none;"><iframe src="https://instagram.com/accounts/logout"></iframe></div>');
-    Meteor.logout();
-    _.delay(function () {
-      Router.go('login');
-    }, 500);
-  }
-})
 
 Template.dates.events({
   'scroll .month-wrapper': function (e) {
@@ -332,6 +329,11 @@ Template.photos.events({
     printStr += bin2hex([1,1,1].concat(code));  // add three high bits for padding
 
     Meteor.call('printFinalImage', printStr);
+
+    _.delay(function () {
+      doLogout();
+    }, 1000);
+
     return false;
   }
 })
