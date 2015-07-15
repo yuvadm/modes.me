@@ -1,11 +1,15 @@
-$(document).ready(function () {
-  if (window.location.pathname == '/') {
+Router.onRun(function () {
+  $(document).ready(function () {
+    if (window.logoInterval !== undefined)
+      clearInterval(window.logoInterval);
+
     var i = 0;
-    setInterval(function() {
+    window.logoInterval = setInterval(function() {
       $('img.home-logo').attr('src', '/img/icons/1_' + ((++i%5)+1) + '.gif');
     }, 2000);
-  }
-});
+  });
+  this.next();
+}, { only: ['login'] });
 
 function prepareDates() {
   var month = $('input[name=month]').val();
