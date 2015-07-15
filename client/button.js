@@ -1,3 +1,12 @@
+$(document).ready(function () {
+  if (window.location.pathname == '/') {
+    var i = 0;
+    setInterval(function() {
+      $('img.home-logo').attr('src', '/img/icons/1_' + ((++i%5)+1) + '.gif');
+    }, 2000);
+  }
+});
+
 function prepareDates() {
   var month = $('input[name=month]').val();
   var year = $('input[name=year]').val();
